@@ -42,6 +42,9 @@ reloadAudio.preload = "auto";
 let shotPoolIndex = 0;
 let emptyPoolIndex = 0;
 let lastTriggerAt = 0;
+let zebraCaptureInitialized = false;
+let lastZebraTriggerFlag = 0;
+let lastZebraTriggerAt = 0;
 
 function createPool(src, size) {
   return Array.from({ length: size }, () => {
@@ -155,6 +158,43 @@ function onKeyDown(event) {
   void fireSequence();
 }
 
+function onZebraTrigger(params) {
+  const triggerFlag = Number(params?.triggerFlag ?? 0);
+  const now = performance.now();
+  const isPress = triggerFlag !== 0 && lastZebraTriggerFlag === 0;
+  lastZebraTriggerFlag = triggerFlag;
+
+  if (!isPress || now - lastZebraTriggerAt < 120) return;
+  lastZebraTriggerAt = now;
+  void fireSequence();
+}
+
+function initializeZebraTriggerCapture() {
+  if (zebraCaptureInitialized || !window.EB?.KeyCapture?.captureTrigger) return false;
+
+  try {
+    window.EB.KeyCapture.captureTrigger(onZebraTrigger);
+    zebraCaptureInitialized = true;
+    ui.keyReadout.textContent = "Zebra Enterprise Browser: gatillo físico activo";
+    document.body.dataset.runtime = "zebra-enterprise-browser";
+    return true;
+  } catch (error) {
+    console.error("No se pudo activar Zebra KeyCapture", error);
+    ui.keyReadout.textContent = "Zebra detectada, pero el gatillo no pudo registrarse";
+    return false;
+  }
+}
+
+function waitForZebraLibraries() {
+  if (initializeZebraTriggerCapture()) return;
+
+  let attempts = 0;
+  const timer = window.setInterval(() => {
+    attempts += 1;
+    if (initializeZebraTriggerCapture() || attempts >= 40) window.clearInterval(timer);
+  }, 250);
+}
+
 ui.settingsButton.addEventListener("click", () => ui.settingsDialog.showModal());
 ui.learnButton.addEventListener("click", () => {
   state.learning = true;
@@ -193,6 +233,7 @@ window.addEventListener("appinstalled", () => {
 
 renderRounds();
 updateKeyLabels();
+waitForZebraLibraries();
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => navigator.serviceWorker.register("service-worker.js"));

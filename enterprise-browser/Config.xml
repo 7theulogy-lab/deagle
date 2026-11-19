@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+  <Applications>
+    <Application>
+      <General>
+        <Name value="Deagle"/>
+        <StartPage value="file://%INSTALLDIR%/deagle/index.html" name="Deagle"/>
+      </General>
+      <InjectEBLibraries>
+        <JSLibraries value="1"/>
+      </InjectEBLibraries>
+      <Scanner>
+        <DisableScannerDuringNavigation value="0"/>
+      </Scanner>
+      <WebFiltering>
+        <WebFilteringEnabled value="0"/>
+        <WhiteListingUrls value=""/>
+        <BlackListingUrls value=""/>
+      </WebFiltering>
+      <DebugSetting>
+        <DebugModeEnable value="0"/>
+      </DebugSetting>
+    </Application>
+  </Applications>
+</Configuration>

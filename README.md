@@ -15,6 +15,10 @@ La aplicación escucha Enter, Space, F1–F12 y algunas teclas multimedia comune
 
 Si el gatillo no produce ningún evento en el modo de aprendizaje, el servicio de escaneo de la PDA lo está interceptando. En ese caso hay que configurar el escáner como *keyboard wedge* o asignarle una tecla compatible desde la utilidad del fabricante.
 
+## Zebra Enterprise Browser
+
+La aplicación también detecta las APIs de Zebra Enterprise Browser y registra el gatillo mediante `EB.KeyCapture.captureTrigger()`. Consulta `enterprise-browser/README.md` y usa el paquete de prueba preparado para la PDA.
+
 ## Probar localmente
 
 Debe servirse por HTTP/HTTPS para registrar el service worker. Por ejemplo:

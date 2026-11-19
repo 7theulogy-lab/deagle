@@ -1,9 +1,9 @@
-const CACHE_NAME = "deagle-v5";
+const CACHE_NAME = "deagle-v6";
 const APP_ASSETS = [
   "./",
   "index.html",
   "styles.css",
-  "app.js?v=5",
+  "app.js?v=6",
   "manifest.webmanifest",
   "assets/icon.svg",
   "assets/icon-192.png",
