@@ -1,5 +1,6 @@
 const SHOTS_PER_MAGAZINE = 6;
-const EMPTY_CLICKS = 2;
+const EMPTY_CLICKS = 3;
+const RELOAD_DURATION_MS = 2000;
 const DEFAULT_TRIGGER_CODES = new Set([
   "Enter", "NumpadEnter", "Space",
   "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12",
@@ -32,9 +33,9 @@ const ui = {
 
 const audioPools = {
   shot: createPool("assets/audio/disparo.wav", SHOTS_PER_MAGAZINE),
-  empty: createPool("assets/audio/vacio.wav", EMPTY_CLICKS)
+  empty: createPool("assets/audio/vacio.mp3", EMPTY_CLICKS)
 };
-const reloadAudio = new Audio("assets/audio/recarga.wav");
+const reloadAudio = new Audio("assets/audio/reload.mp3");
 reloadAudio.preload = "auto";
 
 let shotPoolIndex = 0;
@@ -81,6 +82,14 @@ async function playFromPool(pool, index) {
   await audio.play();
 }
 
+async function playReloadForTwoSeconds() {
+  reloadAudio.currentTime = 0;
+  await reloadAudio.play();
+  await new Promise((resolve) => window.setTimeout(resolve, RELOAD_DURATION_MS));
+  reloadAudio.pause();
+  reloadAudio.currentTime = 0;
+}
+
 async function fireSequence() {
   if (state.locked) return;
   state.locked = true;
@@ -105,12 +114,7 @@ async function fireSequence() {
     }
 
     setStatus("reloading", "RECARGANDO", "Gatillo bloqueado hasta terminar", "↻");
-    reloadAudio.currentTime = 0;
-    await reloadAudio.play();
-    await new Promise((resolve) => {
-      reloadAudio.addEventListener("ended", resolve, { once: true });
-      reloadAudio.addEventListener("error", resolve, { once: true });
-    });
+    await playReloadForTwoSeconds();
     state.shots = 0;
     state.emptyClicks = 0;
     renderRounds();

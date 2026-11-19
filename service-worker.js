@@ -1,14 +1,14 @@
-const CACHE_NAME = "deagle-v1";
+const CACHE_NAME = "deagle-v4";
 const APP_ASSETS = [
   "./",
   "index.html",
   "styles.css",
-  "app.js",
+  "app.js?v=4",
   "manifest.webmanifest",
   "assets/icon.svg",
   "assets/audio/disparo.wav",
-  "assets/audio/vacio.wav",
-  "assets/audio/recarga.wav"
+  "assets/audio/vacio.mp3",
+  "assets/audio/reload.mp3"
 ];
 
 self.addEventListener("install", (event) => {

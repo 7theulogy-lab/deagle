@@ -5,8 +5,8 @@ PWA instalable controlada por el gatillo físico de una PDA.
 ## Secuencia
 
 1. Seis pulsaciones reproducen `assets/audio/disparo.wav`.
-2. Las dos pulsaciones siguientes reproducen `assets/audio/vacio.wav`.
-3. La siguiente pulsación reproduce `assets/audio/recarga.wav` una sola vez.
+2. Las tres pulsaciones siguientes reproducen `assets/audio/vacio.mp3`.
+3. La siguiente pulsación reproduce `assets/audio/reload.mp3` una sola vez, durante un máximo de dos segundos.
 4. El gatillo queda bloqueado durante la recarga; al terminar comienza un cargador nuevo.
 
 ## Configuración del gatillo
