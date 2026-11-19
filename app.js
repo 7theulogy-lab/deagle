@@ -1,4 +1,4 @@
-const SHOTS_PER_MAGAZINE = 6;
+const SHOTS_PER_MAGAZINE = 8;
 const EMPTY_CLICKS = 3;
 const RELOAD_DURATION_MS = 2000;
 const DEFAULT_TRIGGER_CODES = new Set([
@@ -28,7 +28,8 @@ const ui = {
   settingsDialog: document.querySelector("#settings-dialog"),
   learnButton: document.querySelector("#learn-button"),
   clearKeyButton: document.querySelector("#clear-key-button"),
-  savedKey: document.querySelector("#saved-key")
+  savedKey: document.querySelector("#saved-key"),
+  installButton: document.querySelector("#install-button")
 };
 
 const audioPools = {
@@ -52,6 +53,7 @@ function createPool(src, size) {
 
 function renderRounds() {
   ui.rounds.replaceChildren();
+  ui.rounds.style.setProperty("--round-count", String(SHOTS_PER_MAGAZINE));
   const remaining = Math.max(0, SHOTS_PER_MAGAZINE - state.shots);
   ui.roundsLeft.textContent = String(remaining);
   for (let index = 0; index < SHOTS_PER_MAGAZINE; index += 1) {
@@ -170,6 +172,24 @@ ui.settingsDialog.addEventListener("close", () => {
   ui.learnButton.textContent = "Aprender gatillo";
 });
 window.addEventListener("keydown", onKeyDown, { capture: true });
+
+let deferredInstallPrompt = null;
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  ui.installButton.hidden = false;
+});
+ui.installButton.addEventListener("click", async () => {
+  if (!deferredInstallPrompt) return;
+  deferredInstallPrompt.prompt();
+  await deferredInstallPrompt.userChoice;
+  deferredInstallPrompt = null;
+  ui.installButton.hidden = true;
+});
+window.addEventListener("appinstalled", () => {
+  deferredInstallPrompt = null;
+  ui.installButton.hidden = true;
+});
 
 renderRounds();
 updateKeyLabels();

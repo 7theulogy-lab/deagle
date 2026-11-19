@@ -1,11 +1,13 @@
-const CACHE_NAME = "deagle-v4";
+const CACHE_NAME = "deagle-v5";
 const APP_ASSETS = [
   "./",
   "index.html",
   "styles.css",
-  "app.js?v=4",
+  "app.js?v=5",
   "manifest.webmanifest",
   "assets/icon.svg",
+  "assets/icon-192.png",
+  "assets/icon-512.png",
   "assets/audio/disparo.wav",
   "assets/audio/vacio.mp3",
   "assets/audio/reload.mp3"

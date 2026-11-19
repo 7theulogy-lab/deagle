@@ -37,6 +37,20 @@ button { font: inherit; }
   justify-content: space-between;
 }
 
+.topbar-actions { display: flex; align-items: center; gap: 8px; }
+
+.install-button {
+  min-height: 48px;
+  border: 0;
+  border-radius: 14px;
+  padding: 0 17px;
+  background: #d8a52f;
+  color: #111;
+  font-weight: 850;
+}
+
+.install-button[hidden] { display: none; }
+
 .eyebrow {
   margin: 0 0 4px;
   color: #d8a52f;
@@ -108,7 +122,7 @@ h2 { font-size: 1.35rem; }
 .magazine-head { color: #aeb4be; font-size: .84rem; letter-spacing: .08em; }
 .magazine-head strong { color: #f6f6f6; font-size: 1rem; }
 
-.rounds { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-top: 13px; }
+.rounds { display: grid; grid-template-columns: repeat(var(--round-count, 8), 1fr); gap: 8px; margin-top: 13px; }
 .round {
   height: 38px;
   border-radius: 8px 8px 5px 5px;
