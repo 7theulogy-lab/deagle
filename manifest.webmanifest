@@ -1,0 +1,20 @@
+{
+  "name": "Deagle PDA",
+  "short_name": "Deagle",
+  "description": "Simulador de disparo controlado con el gatillo físico de una PDA.",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#090b0f",
+  "theme_color": "#090b0f",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#090b0f" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Deagle</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">PDA · GATILLO FÍSICO</p>
+          <h1>DEAGLE</h1>
+        </div>
+        <button id="settings-button" class="icon-button" type="button" aria-label="Configurar gatillo">⚙</button>
+      </header>
+
+      <section class="status-card" aria-live="polite">
+        <div id="status-icon" class="status-icon">●</div>
+        <p id="status-label" class="status-label">LISTA</p>
+        <p id="status-help" class="status-help">Aprieta el gatillo físico</p>
+      </section>
+
+      <section class="magazine" aria-label="Estado del cargador">
+        <div class="magazine-head">
+          <span>CARGADOR</span>
+          <strong><span id="rounds-left">6</span>/6</strong>
+        </div>
+        <div id="rounds" class="rounds" aria-hidden="true"></div>
+      </section>
+
+      <p id="key-readout" class="key-readout">Teclas activas: Enter, F1–F12 y gatillos comunes</p>
+    </main>
+
+    <dialog id="settings-dialog">
+      <form method="dialog" class="dialog-card">
+        <div class="dialog-head">
+          <div>
+            <p class="eyebrow">CONFIGURACIÓN</p>
+            <h2>Gatillo físico</h2>
+          </div>
+          <button class="icon-button" value="cancel" aria-label="Cerrar">×</button>
+        </div>
+        <p>Si la PDA usa una tecla distinta, selecciona “Aprender” y aprieta una vez el gatillo.</p>
+        <div class="current-key">Tecla aprendida: <strong id="saved-key">ninguna</strong></div>
+        <button id="learn-button" class="primary-button" type="button">Aprender gatillo</button>
+        <button id="clear-key-button" class="secondary-button" type="button">Usar detección automática</button>
+        <p class="fine-print">El sonido se activa directamente con el gatillo; no hay botón de disparo en la pantalla.</p>
+      </form>
+    </dialog>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>

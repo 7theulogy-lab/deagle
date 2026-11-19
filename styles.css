@@ -1,0 +1,158 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #090b0f;
+  color: #f4f6f8;
+  font-synthesis: none;
+}
+
+* { box-sizing: border-box; }
+
+html, body { min-height: 100%; margin: 0; }
+
+body {
+  min-height: 100svh;
+  background:
+    radial-gradient(circle at 50% 28%, rgba(229, 172, 48, 0.12), transparent 34%),
+    linear-gradient(160deg, #11151c 0%, #07090c 72%);
+  overscroll-behavior: none;
+  user-select: none;
+}
+
+button { font: inherit; }
+
+.app-shell {
+  width: min(100%, 520px);
+  min-height: 100svh;
+  margin: 0 auto;
+  padding: max(22px, env(safe-area-inset-top)) 20px max(24px, env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.topbar, .dialog-head, .magazine-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  color: #d8a52f;
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+
+h1, h2 { margin: 0; letter-spacing: .04em; }
+h1 { font-size: clamp(2rem, 10vw, 3.2rem); line-height: .95; }
+h2 { font-size: 1.35rem; }
+
+.icon-button {
+  width: 48px;
+  height: 48px;
+  border: 1px solid #303641;
+  border-radius: 14px;
+  background: #171b22;
+  color: #f7f7f7;
+  font-size: 1.35rem;
+}
+
+.status-card {
+  flex: 1;
+  min-height: 300px;
+  border: 1px solid #2a3039;
+  border-radius: 26px;
+  background: linear-gradient(145deg, rgba(31, 36, 44, .92), rgba(14, 17, 22, .96));
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .35), inset 0 1px rgba(255, 255, 255, .04);
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  text-align: center;
+  padding: 30px;
+}
+
+.status-icon {
+  width: 92px;
+  height: 92px;
+  border: 2px solid #d8a52f;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #d8a52f;
+  font-size: 2.3rem;
+  box-shadow: 0 0 36px rgba(216, 165, 47, .2);
+}
+
+.status-label {
+  margin: 24px 0 5px;
+  font-weight: 900;
+  font-size: 2rem;
+  letter-spacing: .08em;
+}
+
+.status-help { margin: 0; color: #aab1bc; font-size: 1rem; }
+
+.status-card.firing .status-icon { color: #fff; background: #d8a52f; transform: scale(.92); }
+.status-card.empty .status-icon { border-color: #ef6d59; color: #ef6d59; }
+.status-card.reloading .status-icon { animation: pulse 1s infinite; }
+
+.magazine {
+  border: 1px solid #2a3039;
+  border-radius: 18px;
+  padding: 17px 18px 19px;
+  background: rgba(19, 23, 29, .9);
+}
+
+.magazine-head { color: #aeb4be; font-size: .84rem; letter-spacing: .08em; }
+.magazine-head strong { color: #f6f6f6; font-size: 1rem; }
+
+.rounds { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-top: 13px; }
+.round {
+  height: 38px;
+  border-radius: 8px 8px 5px 5px;
+  background: linear-gradient(#f4c85c, #a66e10);
+  border: 1px solid #f7d77e;
+  transition: opacity .16s ease, transform .16s ease;
+}
+.round.spent { opacity: .13; transform: translateY(4px); }
+
+.key-readout { margin: -7px 0 0; text-align: center; color: #747d8b; font-size: .78rem; }
+
+dialog {
+  width: min(calc(100% - 30px), 480px);
+  border: 0;
+  padding: 0;
+  border-radius: 22px;
+  color: #f4f6f8;
+  background: #171b22;
+  box-shadow: 0 28px 80px #000;
+}
+dialog::backdrop { background: rgba(0, 0, 0, .76); backdrop-filter: blur(5px); }
+.dialog-card { padding: 22px; }
+.dialog-card > p { color: #afb6c0; line-height: 1.5; }
+.current-key { margin: 22px 0; padding: 14px; border-radius: 12px; background: #0d1014; color: #abb2bc; }
+.current-key strong { color: #fff; }
+.primary-button, .secondary-button {
+  width: 100%;
+  min-height: 50px;
+  border-radius: 12px;
+  font-weight: 800;
+}
+.primary-button { border: 0; background: #d8a52f; color: #111; }
+.secondary-button { margin-top: 10px; border: 1px solid #39414d; background: transparent; color: #eef0f3; }
+.fine-print { margin-bottom: 0; font-size: .82rem; }
+
+@keyframes pulse { 50% { transform: scale(.88); opacity: .5; } }
+
+@media (max-height: 620px) {
+  .app-shell { gap: 12px; padding-top: 14px; padding-bottom: 14px; }
+  .status-card { min-height: 210px; }
+  .status-icon { width: 72px; height: 72px; }
+  .status-label { margin-top: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}

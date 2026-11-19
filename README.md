@@ -22,4 +22,3 @@ Debe servirse por HTTP/HTTPS para registrar el service worker. Por ejemplo:
 ```powershell
 npx serve .
 ```
-
